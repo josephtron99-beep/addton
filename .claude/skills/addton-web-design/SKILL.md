@@ -23,6 +23,9 @@ Container 1320px, gutter clamp(20px,3.4vw,40px); section padding clamp(96px,12vw
 Chamfer: clip-path polygon with --c (6/8/10px). No rounded corners except coin and card.
 ```
 
+## Text colour (user feedback)
+Headings, card titles and big numbers use --head #CFCFDA, form labels --label #B4B4C0. Pure white #F2F2F7 was too bright for titles; keep it for body links/buttons only.
+
 ## Logo
 Official file: `assets/img/logo.svg` (white wordmark + circular "A" mark + DAO pill, 440×95). It is inlined once as `<path id="logo-path">`, with two symbols: `#logo-full` (viewBox 0 0 440 95) for the nav and footer, and `#logo-mark` (viewBox 0 0 95.2 95) for coin faces and icons. Fill comes from CSS (`.logo{fill:var(--text)}`, coin uses `url(#specMark)`, a userSpaceOnUse gradient). The favicon is the mark on a dark tile. Never redraw the logo or use the old "+" placeholder mark.
 

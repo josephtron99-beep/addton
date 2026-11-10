@@ -1326,3 +1326,12 @@ fieldset.radios legend{padding:0}
 .radio input:checked::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan)}
 .radio input:focus-visible{outline:1.5px solid var(--cyan);outline-offset:3px}
 .radios .radio{justify-content:flex-start;margin:0;font-size:1rem;color:var(--text);border:1px solid var(--line-3)}.radios .radio:has(input:checked){border-color:var(--cyan)}
+
+/* v4.2: centred position radios + softer headings (user feedback: pure white titles too bright) */
+.radios .radio{align-items:center;justify-content:center;gap:10px;line-height:1}
+.radios .radio span{display:block;line-height:1}
+:root{--head:#CFCFDA;--label:#B4B4C0}
+h1,h2,h3,h4,.ptitle,.hero-title,.calc-big,.v-apy,.tile h3,.pitem h3,.layer-head h3,.auth-quote{color:var(--head)}
+h2 .muted,.auth-quote span{color:var(--text-3)}
+.field label,.field .flabel,.check{color:var(--label)}
+.v-top b,.app b,.bus b,.con-tab.on .ct-body b,.mega-link b,.plat-top b,.mkt-name b,.stage b,.ntf b,.br-coin b,.am-auth b,.vm-meta b,.tk-net span+b,.metrics dd,.chain-cells dd,.auth-cells dd,.br-cells dd,.mini-cells dd{color:var(--head)}.tk-net b{color:var(--up)}
