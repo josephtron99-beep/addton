@@ -78,14 +78,56 @@
 <!-- structural grid overlay -->
 <div class="frame-grid" aria-hidden="true"><div class="fg-in"><i></i><i></i><i></i><i></i><i></i></div></div>
 
-<header class="nav auth-nav" id="nav">
+<!-- NAV -->
+<header class="nav" id="nav">
   <div class="container nav-in">
     <a href="index.html" class="brand" aria-label="AddTON home">
       <svg class="logo" viewBox="0 0 440 95" role="img" aria-label="AddTON DAO"><use href="#logo-full"/></svg>
     </a>
+    <a href="products.html" class="eco-cell spec-top"><span class="eco-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Our ecosystem</a>
+    <nav class="menu" aria-label="Primary">
+      <div class="menu-item has-mega">
+        <button class="menu-link" aria-expanded="false">Products <span class="caret" aria-hidden="true">▾</span></button>
+        <div class="mega">
+          <a href="staking.html" class="mega-link"><span class="ico"><svg><use href="#i-stake"/></svg></span><span><b>Staking</b><small>XLM, TON & 45+ coins in compounding vaults</small></span></a>
+          <a href="arbiex.html" class="mega-link"><span class="ico"><svg><use href="#i-arb"/></svg></span><span><b>ArbiEx</b><small>AI arbitrage between DEX and tier-1 CEX</small></span></a>
+          <a href="gram-chain.html" class="mega-link"><span class="ico"><svg><use href="#i-chain"/></svg></span><span><b>Gram Chain & GCC</b><small>Proof of Authority Layer 1, 0.8s blocks</small></span></a>
+          <a href="grampe.html" class="mega-link"><span class="ico"><svg><use href="#i-card"/></svg></span><span><b>GramPe</b><small>Wallet app with RuPay debit card</small></span></a>
+        </div>
+      </div>
+      <div class="menu-item has-mega">
+        <button class="menu-link" aria-expanded="false">Earn <span class="caret" aria-hidden="true">▾</span></button>
+        <div class="mega mega-sm">
+          <a href="helping.html" class="mega-link"><span class="ico"><svg><use href="#i-users"/></svg></span><span><b>Helping</b><small>Help-to-earn community programme</small></span></a>
+          <a href="airdrop.html" class="mega-link"><span class="ico"><svg><use href="#i-star"/></svg></span><span><b>Airdrop</b><small>Rewards for social tasks & content</small></span></a>
+          <a href="play-to-earn.html" class="mega-link"><span class="ico"><svg><use href="#i-game"/></svg></span><span><b>Play to Earn</b><small>Coming soon · games with crypto rewards</small></span></a>
+        </div>
+      </div>
+      <a class="menu-link" href="opportunities.html">Opportunities</a>
+      <a class="menu-link" href="index.html#security">Security</a>
+    </nav>
     <div class="nav-actions">
-      <a class="back" href="index.html">← Back to site</a>
+      <a class="nav-login" href="login.html">Log in</a>
       <a class="btn-hud" href="signup.html"><span class="hud-dots" aria-hidden="true">••</span>Create account</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile" id="mobile">
+    <div class="mobile-in">
+      <p class="label">Products</p>
+      <a href="staking.html"><span>01</span>Staking</a>
+      <a href="arbiex.html"><span>02</span>ArbiEx</a>
+      <a href="gram-chain.html"><span>03</span>Gram Chain & GCC</a>
+      <a href="grampe.html"><span>04</span>GramPe</a>
+      <p class="label">Earn</p>
+      <a href="helping.html"><span>05</span>Helping</a>
+      <a href="airdrop.html"><span>06</span>Airdrop</a>
+      <a href="play-to-earn.html"><span>07</span>Play to Earn</a>
+      <a href="opportunities.html"><span>08</span>Opportunities</a>
+      <div class="mobile-cta">
+        <a class="btn btn-line" href="login.html">Log in</a>
+        <a class="btn btn-primary" href="signup.html">Create account</a>
+      </div>
     </div>
   </div>
 </header>

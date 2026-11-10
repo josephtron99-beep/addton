@@ -2,89 +2,62 @@
 {"title":"Create Your AddTON Account | Sign Up with Sponsor ID","desc":"Join AddTON DAO with your Sponsor ID to stake XLM, use the ArbiEx AI bot, join the airdrop and start earning on one platform.","auth":true}
 -->
 <div class="auth">
-  <section class="auth-main hero" aria-labelledby="h-join">
-    <span class="sec-tag chamfer" data-intro><span>Create account</span><b>3 steps</b></span>
-    <h1 id="h-join" data-intro>Join AddTON</h1>
-    <p class="lead" data-intro>Registration needs a Sponsor ID from an existing member. It takes about a minute.</p>
+  <section class="auth-main compact hero" aria-labelledby="h-join">
+    <h1 id="h-join" data-intro>Create your account</h1>
+    <p class="lead" data-intro>A Sponsor ID from an existing member is required.</p>
 
     <form class="form" data-form novalidate data-intro>
-      <ol class="stepper" aria-label="Sign-up progress">
-        <li class="on" aria-current="step"><b>1</b>Sponsor</li>
-        <li><b>2</b>Profile</li>
-        <li><b>3</b>Security</li>
-      </ol>
-
-      <!-- step 1: sponsor -->
-      <fieldset class="fstep" style="border:0">
-        <h2>Who invited you?</h2>
+      <div class="form-row">
         <div class="field">
-          <label for="sponsor">Sponsor ID <small>Required</small></label>
+          <label for="sponsor">Sponsor ID</label>
           <input class="input" id="sponsor" name="sponsor" type="text" placeholder="e.g. ADD12345" autocomplete="off" spellcheck="false" required>
-          <p class="hint">Ask the member who invited you for their Sponsor ID.</p>
-          <p class="msg">Enter the Sponsor ID of the member who invited you.</p>
+          <p class="msg">Enter your Sponsor ID.</p>
         </div>
-        <div class="field">
-          <p class="flabel">Your position in the sponsor's team</p>
-          <div class="pos" role="radiogroup" aria-label="Position">
-            <label><input type="radio" name="position" value="left" checked>
-              <svg viewBox="0 0 96 56" aria-hidden="true"><line x1="48" y1="14" x2="22" y2="42"/><line x1="48" y1="14" x2="74" y2="42"/><circle cx="48" cy="14" r="10"/><text x="48" y="14">S</text><circle class="you" cx="22" cy="42" r="10"/><text x="22" y="42">You</text><circle cx="74" cy="42" r="10"/></svg>
-              <b>Left</b></label>
-            <label><input type="radio" name="position" value="right">
-              <svg viewBox="0 0 96 56" aria-hidden="true"><line x1="48" y1="14" x2="22" y2="42"/><line x1="48" y1="14" x2="74" y2="42"/><circle cx="48" cy="14" r="10"/><text x="48" y="14">S</text><circle cx="22" cy="42" r="10"/><circle class="you" cx="74" cy="42" r="10"/><text x="74" y="42">You</text></svg>
-              <b>Right</b></label>
+        <fieldset class="field radios">
+          <legend class="flabel">Position</legend>
+          <div class="radio-row">
+            <label class="radio"><input type="radio" name="position" value="left" checked> <span>Left</span></label>
+            <label class="radio"><input type="radio" name="position" value="right"> <span>Right</span></label>
           </div>
-          <p class="hint">Choose which side of your sponsor's network you'll join.</p>
-        </div>
-        <button class="btn btn-primary" type="button" data-next>Continue <span class="arr" aria-hidden="true">→</span></button>
-      </fieldset>
-
-      <!-- step 2: profile -->
-      <fieldset class="fstep" style="border:0" hidden>
-        <h2>Tell us about you</h2>
+        </fieldset>
+      </div>
+      <div class="field">
+        <label for="name">Full name</label>
+        <input class="input" id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <p class="msg">Enter your full name.</p>
+      </div>
+      <div class="form-row">
         <div class="field">
-          <label for="name">Full name</label>
-          <input class="input" id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
-          <p class="msg">Enter your full name.</p>
-        </div>
-        <div class="field">
-          <label for="mobile">Mobile number</label>
-          <input class="input" id="mobile" name="mobile" type="tel" placeholder="Mobile with country code" autocomplete="tel" data-rule="phone" required>
-          <p class="hint">With country code, e.g. +919876543210</p>
-          <p class="msg">Enter a mobile number with country code.</p>
+          <label for="phone">Mobile number</label>
+          <input class="input" id="phone" name="mobile" type="tel" placeholder="+91 98765 43210" autocomplete="tel" data-rule="phone" required>
+          <p class="msg">Enter mobile with country code.</p>
         </div>
         <div class="field">
           <label for="email">Email</label>
           <input class="input" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" data-rule="email" required>
-          <p class="hint">Your verification link and wallet details are sent here.</p>
-          <p class="msg">Enter a valid email address.</p>
+          <p class="msg">Enter a valid email.</p>
         </div>
-        <div class="fnav"><button class="btn btn-line" type="button" data-back>Back</button><button class="btn btn-primary" type="button" data-next>Continue <span class="arr" aria-hidden="true">→</span></button></div>
-      </fieldset>
-
-      <!-- step 3: security -->
-      <fieldset class="fstep" style="border:0" hidden>
-        <h2>Secure your account</h2>
+      </div>
+      <div class="form-row">
         <div class="field">
-          <label for="pw">Password <small>8 to 20 characters</small></label>
+          <label for="pw">Password</label>
           <div class="iwrap">
-            <input class="input" id="pw" name="password" type="password" placeholder="8 to 20 characters" autocomplete="new-password" data-rule="password" maxlength="20" required>
+            <input class="input" id="pw" name="password" type="password" placeholder="8–20 characters" autocomplete="new-password" data-rule="password" maxlength="20" required>
             <button class="pw-tog" type="button" aria-label="Show password" aria-pressed="false">Show</button>
           </div>
-          <div class="pw-meter" id="pwMeter" data-s="0" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          <ul class="pw-rules" id="pwRules"><li>8–20 characters</li><li>A number</li><li>Upper &amp; lower case</li><li>A symbol (stronger)</li></ul>
           <p class="msg">Use 8 to 20 characters.</p>
         </div>
         <div class="field">
           <label for="pw2">Confirm password</label>
-          <input class="input" id="pw2" name="confirm" type="password" placeholder="Repeat your password" autocomplete="new-password" data-match="#pw" required>
+          <input class="input" id="pw2" name="confirm" type="password" placeholder="Repeat password" autocomplete="new-password" data-match="#pw" required>
           <p class="msg">Passwords don't match.</p>
         </div>
-        <label class="check"><input type="checkbox" name="terms" required> <span>I agree to the AddTON Terms &amp; Conditions and understand that crypto assets are volatile.</span></label>
-        <div class="form-msg" tabindex="-1" role="status">
-          <b>Preview only.</b> This redesigned page isn't connected to the AddTON account server yet, so no account was created. Please register on the <a href="https://www.addton.io/signup.html">current secure sign-up page</a>.
-        </div>
-        <div class="fnav"><button class="btn btn-line" type="button" data-back>Back</button><button class="btn btn-primary" type="submit">Create my account <span class="arr" aria-hidden="true">→</span></button></div>
-      </fieldset>
+      </div>
+      <label class="check"><input type="checkbox" name="terms" required> <span>I agree to the AddTON Terms &amp; Conditions.</span></label>
+      <div class="form-msg" tabindex="-1" role="status">
+        <b>Preview only.</b> This redesigned page isn't connected to the AddTON account server yet, so no account was created. Please register on the <a href="https://www.addton.io/signup.html">current secure sign-up page</a>.
+      </div>
+      <button class="btn btn-primary" type="submit">Create account <span class="arr" aria-hidden="true">→</span></button>
     </form>
     <p class="alt">Already have an account? <a href="login.html">Log in</a></p>
   </section>
@@ -101,11 +74,7 @@
       <div class="coin-shadow"></div>
     </div>
     <div>
-      <ol class="auth-steps">
-        <li><span>01</span>Connect with your sponsor</li>
-        <li><span>02</span>Create your profile</li>
-        <li><span>03</span>Secure it &amp; start earning</li>
-      </ol>
+      <p class="auth-quote">One account. <span>Staking, ArbiEx, GramPe and every AddTON product.</span></p>
       <dl class="auth-cells" style="margin-top:28px">
         <div><dt>Coins</dt><dd>45+</dd></div>
         <div><dt>XLM APY*</dt><dd>250%+</dd></div>

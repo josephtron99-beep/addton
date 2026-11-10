@@ -116,20 +116,6 @@ const nav = (m) => `
 </header>
 `;
 
-const authNav = (m) => `
-<header class="nav auth-nav" id="nav">
-  <div class="container nav-in">
-    <a href="index.html" class="brand" aria-label="AddTON home">
-      <svg class="logo" viewBox="0 0 440 95" role="img" aria-label="AddTON DAO"><use href="#logo-full"/></svg>
-    </a>
-    <div class="nav-actions">
-      <a class="back" href="index.html">← Back to site</a>
-      ${m.page === 'signup' ? '<a class="btn-hud" href="login.html"><span class="hud-dots" aria-hidden="true">••</span>Log in</a>' : '<a class="btn-hud" href="signup.html"><span class="hud-dots" aria-hidden="true">••</span>Create account</a>'}
-    </div>
-  </div>
-</header>
-`;
-
 const footer = `
 <footer class="footer">
   <div class="container">
@@ -189,7 +175,7 @@ for (const file of fs.readdirSync(dir).filter(f => f.endsWith('.html'))) {
   meta.page = file.replace(/\.html$/, '');
   const body = src.slice(m[0].length).trim();
   const html = meta.auth
-    ? head(meta, body) + authNav(meta) + `\n<main id="main">\n${body}\n</main>\n` + authFooter + scripts
+    ? head(meta, body) + nav(meta) + `\n<main id="main">\n${body}\n</main>\n` + authFooter + scripts
     : head(meta, body) + sidenav(meta.sections) + announce + nav(meta) + `\n<main id="main">\n${body}\n</main>\n` + footer + scripts;
   fs.writeFileSync(path.join(root, meta.page + '.html'), html);
   n++;
