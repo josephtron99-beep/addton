@@ -82,5 +82,15 @@ Never use `once: true` on ScrollTriggers. With GSAP 3.12, self-killing triggers 
 ## Content rules
 Only facts from addton.io. No invented partners, users, audits or testimonials. Every APY/profit figure gets a "not guaranteed" note. Every CTA area mentions that a Sponsor ID is required.
 
+## Multi-page build (v4)
+- Home is hand-written in `index.html`. All other pages are generated: edit the body in `tools/pages/<name>.html` (a JSON meta comment at the top: title, desc, `faq`, `sections` for the sidenav, `auth` for account pages), then run `node tools/build.mjs`. The script adds the shared head, SVG defs (read from index.html), announcement, nav with `aria-current`, footer, sticky mobile CTA and scripts. Never edit generated root `.html` files by hand; commit them, because Vercel serves them as-is.
+- Internal links are relative (`staking.html`), so the site works on Vercel and locally.
+- `assets/js/main.js` modules each check for their own elements, so demos (staking calc `#amt`, ArbiEx `#arb`, blocks `#gB`, markets `.mkt`, pipeline `#pipe`, card `#pcard`) can be reused on any page with the same markup. Page-only interactions live in `assets/js/pages.js`.
+- Gotcha: when patching JS with `String.replace`, `$$` in the replacement becomes `$`. Use a function replacement.
+- Inner page grammar: `.hero.phero` (crumbs, sec-tag, `.ptitle` with two `.tframe` lines, lead, CTAs, a unique visual in `.phero-vis`) → `.metrics.m3/.m4` → numbered sections → FAQ → CTA. Each page has its own hero visual: staking coin + orbit, ArbiEx trade ticket + flow, Gram coin, GramPe phone + card, Helping network, Airdrop notification feed, Play-to-Earn game card.
+- Components: `.cells` (gap-line grid, set `--cols`; `.c3` keeps 3 columns on tablet), `.cel`, `.tile`, `.vault`, `.split2`, `.checks`, `.olist`, `.note` / `.note.safe`, `.console.solo` + `.demo-foot`, `.stable`, `.bridge`, `.plat`, `.vmock` / `.amock`.
+- Never put a padding shorthand on an element that also has `.container`: it wipes the side gutter. Use padding-top / padding-bottom.
+- Forms (login, sign-up, forgot password, airdrop submit) are front-end only: client validation, show/hide password, strength meter, 3-step sign-up. A valid submit sends nothing and shows a `.form-msg` linking to the current page on addton.io, until the backend (session, anti-forgery token, captcha) is wired in.
+
 ## QA before showing the user
 360/390/768/1024/1280/1440 widths: no horizontal scroll, no overlaps (watch the sidenav against right rails), tap targets at least 44px, zero console errors, visible focus, reduced-motion pass. Files: index.html, assets/css/styles.css, assets/js/main.js, assets/img/. These deploy unchanged to Vercel.

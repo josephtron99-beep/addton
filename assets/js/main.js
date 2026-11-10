@@ -83,8 +83,8 @@
     if (!nav.classList.contains('open')) { if (y > 500 && y > lastY + 4) nav.classList.add('hide'); else if (y < lastY - 4) nav.classList.remove('hide'); }
     lastY = y;
   }, { passive: true });
-  function closeMenu() { nav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; lenis && lenis.start(); }
-  burger.addEventListener('click', () => {
+  function closeMenu() { nav.classList.remove('open'); burger && burger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; lenis && lenis.start(); }
+  burger && burger.addEventListener('click', () => {
     const o = !nav.classList.contains('open');
     nav.classList.toggle('open', o); burger.setAttribute('aria-expanded', String(o));
     document.body.style.overflow = o ? 'hidden' : ''; lenis && (o ? lenis.stop() : lenis.start());
@@ -116,6 +116,7 @@
   const cmdT = $('#cmdText'), cmdO = $('#cmdOut'), cmdTag = $('#cmdTag');
   let ci = 0;
   const typeCmd = () => {
+    if (!cmdT) return;
     const [c, o, tag] = cmds[ci++ % cmds.length];
     cmdO.style.opacity = 0; cmdTag.textContent = tag;
     if (RM) { cmdT.textContent = c; cmdO.textContent = '✓ ' + o; cmdO.style.opacity = 1; return setTimeout(typeCmd, 4000); }
@@ -142,7 +143,7 @@
   /* ---------- coins marquee ---------- */
   const coins = [['XLM','Stellar','#2A2A35'],['TON','Toncoin','#0098EA'],['GCC','Gram Chain','#6C5CFF'],['wGCC','wGCC','#C99A06'],['RWC','Rental Wallet Coin','#6B5B3E'],['₿','Bitcoin','#F7931A'],['Ξ','Ethereum','#627EEA'],['$','Tether','#26A17B'],['BNB','BNB','#C99A06'],['SOL','Solana','#9945FF'],['Ł','Litecoin','#345D9D'],['XRP','XRP','#23292F'],['TRX','TRON','#EB0029'],['$','USDC','#2775CA']];
   const ch = coins.map(([s, n, c]) => `<span class="coin"><i style="--c:${c}">${s}</i>${n}</span>`).join('');
-  $('#coins').innerHTML = ch + ch;
+  if ($('#coins')) $('#coins').innerHTML = ch + ch;
 
   /* ---------- announcement: dismissible, remembered per announcement id ---------- */
   const ann = $('#announce'), ANN_KEY = 'addton-ann-gcc-listing';
@@ -158,10 +159,12 @@
   /* ---------- mobile sticky CTA: visible after hero, hidden near final CTA/footer ---------- */
   const mcta = $('#mcta'), heroEl = $('.hero'), ctaEl = $('.cta-sec');
   let pastHero = false, nearEnd = false;
-  const syncCta = () => mcta.classList.toggle('show', pastHero && !nearEnd && !nav.classList.contains('open'));
-  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; syncCta(); }).observe(heroEl);
-  new IntersectionObserver(([e]) => { nearEnd = e.isIntersecting || e.boundingClientRect.top < 0; syncCta(); }).observe(ctaEl);
-  burger.addEventListener('click', syncCta);
+  if (mcta && heroEl && ctaEl) {
+    const syncCta = () => mcta.classList.toggle('show', pastHero && !nearEnd && !nav.classList.contains('open'));
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; syncCta(); }).observe(heroEl);
+    new IntersectionObserver(([e]) => { nearEnd = e.isIntersecting || e.boundingClientRect.top < 0; syncCta(); }).observe(ctaEl);
+    burger && burger.addEventListener('click', syncCta);
+  }
 
   /* ---------- products: mobile meta row (icon + index), desktop uses the pinned coin ---------- */
   $$('.pitem').forEach((it, i, all) => {
@@ -183,11 +186,12 @@
     setTimeout(() => { pIco.setAttribute('href', '#' + it.dataset.icon); pName.textContent = it.dataset.name; }, 280);
     setTimeout(() => pTilt.classList.remove('flip'), 1000);
   };
-  const pio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setProduct(+e.target.dataset.i); }), { rootMargin: '-48% 0px -48% 0px' });
-  items.forEach(it => pio.observe(it));
+  const pio = pTilt && new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setProduct(+e.target.dataset.i); }), { rootMargin: '-48% 0px -48% 0px' });
+  if (pio) items.forEach(it => pio.observe(it));
 
   /* ---------- SIMULATOR CONSOLE: tabs (auto-advance, pause on hover/interaction) ---------- */
   const conTabs = $$('.con-tab'), panes = $$('.pane'), conEl = $('#console');
+  if (conEl && conTabs.length) {
   const TAB_MS = 12000;
   let activeTab = 0, autoplay = !RM, conInView = false, conHover = false, tabStart = performance.now(), tabRaf = 0;
   const showTab = (i, focus) => {
@@ -233,11 +237,13 @@
     if (!conInView && tabRaf) { cancelAnimationFrame(tabRaf); tabRaf = 0; }
   }, { threshold: 0.35 }).observe(conEl);
   if (RM) stopAuto();
+  }
 
   /* ---------- 01 staking projection ---------- */
   const APY = { XLM: 2.5, TON: 2.5 };
   let coin = 'XLM', shown = 0, raf = 0;
   const amt = $('#amt'), mo = $('#mo');
+  if (amt && mo) {
   const fill = r => r.style.setProperty('--p', ((r.value - r.min) / (r.max - r.min)) * 100 + '%');
   const tweenBig = to => {
     cancelAnimationFrame(raf);
@@ -274,9 +280,11 @@
   $$('.presets button').forEach(b => b.addEventListener('click', () => { amt.value = b.dataset.amt; calc(); }));
   $$('#pane-stake .seg button').forEach(b => b.addEventListener('click', () => { $$('#pane-stake .seg button').forEach(x => x.classList.toggle('on', x === b)); coin = b.dataset.coin; calc(); }));
   calc();
+  }
 
   /* ---------- 02 ArbiEx spread monitor ---------- */
   const TH = 0.6, GMAX = 1.2;
+  if ($('#arb')) {
   let spreads = Array.from({ length: 40 }, () => (Math.random() < .2 ? .65 + Math.random() * .45 : Math.random() * .5)), arbT = null, tn = 12853, base = 3.41, scans = 0, trades = 0, net = 0;
   const thY = 90 - (TH / GMAX) * 80, thL = $('.spark .th'); thL.setAttribute('y1', thY); thL.setAttribute('y2', thY);
   const drawSpark = () => $('#aSpark').setAttribute('d', spreads.map((s, i) => (i ? 'L' : 'M') + ((i / (spreads.length - 1)) * 400).toFixed(1) + ' ' + (90 - (Math.min(GMAX, s) / GMAX) * 80).toFixed(1)).join(' '));
@@ -299,12 +307,14 @@
   };
   drawSpark();
   whenVisible($('#arb'), () => { if (!arbT && !RM) arbT = setInterval(arbTick, 1100); }, () => { clearInterval(arbT); arbT = null; });
+  }
 
   /* ---------- 03 Gram block stream (real 0.8s) ----------
      Conveyor: every block keeps an index (--i); a new block enters at -1 as "pending",
      all blocks glide one slot right together, then the new head confirms. */
   let h = 8412206, gT = null, prevStr = '', gCount = 0, gTx = 0;
   const gB = $('#gB'), timer = $('#gT'), gH = $('#gH'), MAX = 7;
+  if (gB) {
   const chain = [];
   const renderHeight = () => {
     const s = '#' + fmt(h);
@@ -339,6 +349,7 @@
   for (let i = MAX - 2; i >= 0; i--) { const b = makeBlock(h - i, false); gB.appendChild(b); chain.unshift(b); }
   renderHeight(); place();
   whenVisible($('#chain'), () => { if (!gT && !RM) gT = setInterval(mk, 800); }, () => { clearInterval(gT); gT = null; });
+  }
 
   /* ---------- LIVE MARKETS (TON + XLM) ----------
      Single source of truth: CoinGecko public API (Binance's TONUSDT did not match Toncoin).
@@ -497,17 +508,19 @@
     vals.forEach(v => v.classList.toggle('on', s === 1 || s === 2));   // validators sign, then stay lit while the block seals
     pn++;
   };
-  whenVisible($('#pipe'), () => { if (!pipeT && !RM) pipeT = setInterval(pipeTick, 200); }, () => { clearInterval(pipeT); pipeT = null; });
+  if (stages.length) whenVisible($('#pipe'), () => { if (!pipeT && !RM) pipeT = setInterval(pipeTick, 200); }, () => { clearInterval(pipeT); pipeT = null; });
 
   /* ---------- card tilt + magnetic ---------- */
   const card = $('#pcard'), stage = $('#cardStage');
-  if (FINE && !RM) {
+  if (FINE && !RM && card && stage) {
     stage.addEventListener('pointermove', e => {
       const r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
       card.style.transform = `rotateY(${(x - .5) * 24}deg) rotateX(${(.5 - y) * 16}deg)`;
       card.style.setProperty('--sx', x * 100 + '%'); card.style.setProperty('--sy', y * 100 + '%');
     });
     stage.addEventListener('pointerleave', () => (card.style.transform = ''));
+  }
+  if (FINE && !RM) {
     $$('.magnetic').forEach(b => {
       b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .2}px,${(e.clientY - r.top - r.height / 2) * .3}px)`; });
       b.addEventListener('pointerleave', () => (b.style.transform = ''));
@@ -547,8 +560,8 @@
       .to('.hero .tframe', { clipPath: 'inset(0 0% 0 0)', duration: 1.1, stagger: .15 }, .2)
       .to('.hero .tline', { yPercent: 0, duration: 1.2, stagger: .15 }, .45)
       .to('.hero [data-intro]', { opacity: 1, y: 0, duration: 1.1, stagger: .1 }, .5)
-      .from('#heroCoin .coin-spin', { scale: .6, rotateY: -200, duration: 1.8, ease: 'expo.out' }, .4)
-      .from('.metrics .cell', { opacity: 0, y: 20, duration: .9, stagger: .07 }, .9);
+      .from('.hero .metrics .cell', { opacity: 0, y: 20, duration: .9, stagger: .07 }, .9);
+    if ($('#heroCoin')) tl.from('#heroCoin .coin-spin', { scale: .6, rotateY: -200, duration: 1.8, ease: 'expo.out' }, .4);
   }, { once: true });
   // hero tline needs overflow clip
   $$('.hero .tframe').forEach(f => (f.style.overflow = 'hidden'));
@@ -556,8 +569,8 @@
   // hero coin drifts up and shrinks on scroll
   ScrollTrigger.matchMedia({
     '(min-width: 1025px)': () => {
-      gsap.to('#heroCoin', { yPercent: -25, scale: .85, opacity: .4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } });
-      gsap.to('.hero-glow', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+      if ($('.hero-grid #heroCoin')) gsap.to('#heroCoin', { yPercent: -25, scale: .85, opacity: .4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } });
+      if ($('.hero-glow')) gsap.to('.hero-glow', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     }
   });
 
@@ -587,16 +600,16 @@
   });
 
   // steps progress line
-  gsap.to('#stepsLine', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.steps', start: 'top 75%', end: 'bottom 45%', scrub: .5 } });
+  if ($('#stepsLine')) gsap.to('#stepsLine', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.steps', start: 'top 75%', end: 'bottom 45%', scrub: .5 } });
 
   // wallet card entrance
-  gsap.from('#pcard', { rotateY: -35, rotateX: 14, y: 60, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '#cardStage', start: 'top 80%', toggleActions: 'play none none none' } });
+  if ($('#cardStage')) gsap.from('#pcard', { rotateY: -35, rotateX: 14, y: 60, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '#cardStage', start: 'top 80%', toggleActions: 'play none none none' } });
 
   // CTA frames
-  gsap.from('.cta .tframe', { clipPath: 'inset(0 100% 0 0)', duration: 1.2, ease: 'expo.out', stagger: .15, scrollTrigger: { trigger: '.cta', start: 'top 75%', toggleActions: 'play none none none' } });
+  if ($('.cta')) gsap.from('.cta .tframe', { clipPath: 'inset(0 100% 0 0)', duration: 1.2, ease: 'expo.out', stagger: .15, scrollTrigger: { trigger: '.cta', start: 'top 75%', toggleActions: 'play none none none' } });
 
   // footer giant word
-  gsap.from('.giant', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.giant', start: 'top 95%', toggleActions: 'play none none none' } });
+  if ($('.giant')) gsap.from('.giant', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.giant', start: 'top 95%', toggleActions: 'play none none none' } });
 
   addEventListener('load', () => ScrollTrigger.refresh());
 })();

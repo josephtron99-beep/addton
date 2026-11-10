@@ -1,0 +1,202 @@
+<!--
+{"title":"ArbiEx AI Arbitrage Bot | Automated Crypto Trading | AddTON","desc":"ArbiEx is an AI staking bot that trades price gaps between DEX pools and tier-1 exchanges 24/7, averaging +5% profit. Stake once and let AI trade.","faq":true,
+ "sections":[["top","Intro"],["how","How"],["monitor","Monitor"],["watches","AI checks"],["why","Why"],["faq","FAQ"]]}
+-->
+<!-- HERO -->
+<section class="hero phero" id="top" data-nav>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container phero-grid">
+    <div class="phero-copy">
+      <nav class="crumbs" aria-label="Breadcrumb" data-intro><a href="index.html">Home</a><span>/</span><a href="products.html">Products</a><span>/</span><b>ArbiEx</b></nav>
+      <span class="sec-tag chamfer" data-intro><span>AI staking bot</span><b>24/7</b></span>
+      <h1 class="ptitle">
+        <span class="tframe"><span class="tline">AI arbitrage that</span></span>
+        <span class="tframe"><span class="tline">works while you sleep</span></span>
+      </h1>
+      <p class="lead" data-intro>ArbiEx is a staking bot that uses AI to spot price gaps between DEX liquidity pools and tier-1 exchanges, trades them automatically and sends the profit to your wallet.</p>
+      <div class="hero-ctas" data-intro>
+        <a class="btn btn-primary magnetic" href="signup.html">Activate ArbiEx <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-line" href="#how">How it works</a>
+      </div>
+    </div>
+    <div class="phero-vis" data-intro>
+      <div class="vis-col">
+        <div class="ticket hud" id="ticket" aria-label="Example ArbiEx trade (illustration)">
+          <div class="tk-head"><span id="tkId">Trade #12853</span><span class="tk-state done">Executed</span></div>
+          <dl class="tk-rows">
+            <div><dt>Buy · DEX pool</dt><dd id="tkBuy">$3.412</dd></div>
+            <div><dt>Sell · Tier-1 CEX</dt><dd id="tkSell">$3.598</dd></div>
+            <div><dt>Spread</dt><dd class="up" id="tkSp">+5.4%</dd></div>
+            <div><dt>Fees &amp; slippage</dt><dd class="dn" id="tkFee">−$0.21</dd></div>
+          </dl>
+          <div class="tk-net"><span>Net profit</span><b id="tkNet">+$184.20</b></div>
+        </div>
+        <div class="flow" aria-hidden="true"><span class="on">DEX pools</span><span>Tier-1 CEX</span><span>ArbiEx AI</span><span>Your wallet</span></div>
+        <p class="vis-cap">Illustration · not a live trade</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <dl class="metrics m3">
+      <div class="cell"><dt>Average profit</dt><dd data-count="5" data-prefix="+" data-suffix="%">+5%</dd></div>
+      <div class="cell"><dt>Automated trading</dt><dd>24/7</dd></div>
+      <div class="cell"><dt>Arbitrage route</dt><dd>DEX⇄CEX</dd></div>
+    </dl>
+    <p class="fine center">The +5% figure is a historical average. Results depend on market conditions and are not guaranteed.</p>
+  </div>
+</section>
+
+<!-- 01 HOW -->
+<section class="section" id="how" data-nav>
+  <div class="container">
+    <header class="sec-head split-head">
+      <div>
+        <span class="sec-tag chamfer"><span>How it works</span><b>01</b></span>
+        <h2 data-split>Stake once. <span class="muted">ArbiEx does the trading.</span></h2>
+      </div>
+      <p class="lead">Arbitrage means buying where a coin is cheaper and selling where it is dearer at the same moment. ArbiEx does it at machine speed.</p>
+    </header>
+    <div class="steps">
+      <div class="step reveal"><span class="pnum chamfer-sm">01</span><h3>Stake to activate</h3><p>Fund the bot with your stake from your AddTON account.</p></div>
+      <div class="step reveal"><span class="pnum chamfer-sm">02</span><h3>AI scans markets</h3><p>Models watch DEX liquidity pools and tier-1 exchange order books around the clock.</p></div>
+      <div class="step reveal"><span class="pnum chamfer-sm">03</span><h3>Trades the gap</h3><p>When a spread beats fees and slippage, ArbiEx buys low and sells high automatically.</p></div>
+      <div class="step reveal"><span class="pnum chamfer-sm">04</span><h3>Profit to your wallet</h3><p>Net profit is credited to your balance and every trade is listed in your dashboard.</p></div>
+    </div>
+    <div class="steps-line" aria-hidden="true"><i id="stepsLine"></i></div>
+  </div>
+</section>
+
+<!-- 02 MONITOR -->
+<section class="section" id="monitor" data-nav>
+  <div class="container">
+    <header class="sec-head split-head">
+      <div>
+        <span class="sec-tag chamfer"><span>Live simulator</span><b>02</b></span>
+        <h2 data-split>Watch the bot <span class="muted">decide.</span></h2>
+      </div>
+      <p class="lead">The needle shows the price gap. The orange line is the cost of trading. ArbiEx only trades when the needle crosses into the green zone.</p>
+    </header>
+    <div class="console solo hud reveal">
+      <div class="con-main">
+        <div class="con-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="con-path">addton://simulator/arbiex</span>
+          <span class="live-pill"><i></i>Scanning</span>
+        </div>
+        <div class="pane">
+          <div id="arb">
+            <div class="prices">
+              <div><p class="label">Buy · DEX pool</p><p class="px" id="aDex">3.4120</p></div>
+              <div class="spread"><p class="label">Spread · TON/USDT</p><p class="sp" id="aSp">+0.00%</p><p class="sp-state" id="aState">Waiting for a gap</p></div>
+              <div class="ra"><p class="label">Sell · Tier-1 CEX</p><p class="px" id="aCex">3.5980</p></div>
+            </div>
+            <div class="gauge" aria-hidden="true">
+              <div class="g-track"><span class="g-zone"></span><span class="g-fee"></span><i class="g-needle" id="aNeedle"></i></div>
+              <div class="g-lbl"><span>0%</span><span class="g-th">Fees + slippage · 0.60%</span><span>1.2%+</span></div>
+            </div>
+            <div class="arb-grid">
+              <div><p class="label">Spread history</p>
+                <svg class="spark" viewBox="0 0 400 90" preserveAspectRatio="none" aria-hidden="true"><line class="th" x1="0" x2="400"/><path class="sl" id="aSpark"/></svg>
+              </div>
+              <div><p class="label">Executed trades</p><ul class="log" id="aLog"></ul></div>
+            </div>
+            <dl class="mini-cells">
+              <div><dt>Gaps scanned</dt><dd id="aScan">0</dd></div>
+              <div><dt>Trades executed</dt><dd id="aTrades">0</dd></div>
+              <div><dt>Session net (sim.)</dt><dd id="aNet" class="up">+$0.00</dd></div>
+            </dl>
+          </div>
+        </div>
+        <p class="demo-foot"><span><span class="sim-badge">Simulation</span>Prices and trades are simulated to show how the fee threshold works.</span><span>Not live trading data.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 WHAT THE AI WATCHES -->
+<section class="section" id="watches" data-nav>
+  <div class="container split2">
+    <div>
+      <span class="sec-tag chamfer"><span>What the AI watches</span><b>03</b></span>
+      <h2 data-split>Every spread, scored <span class="muted">before a single trade.</span></h2>
+      <p class="lead">ArbiEx only acts when the numbers work after costs, so it is chasing net profit, not just price differences.</p>
+      <ul class="checks">
+        <li><span><b>Price spreads</b> between DEX liquidity pools and tier-1 centralized exchanges.</span></li>
+        <li><span><b>Liquidity depth</b>, so trades can fill at the expected price.</span></li>
+        <li><span><b>Fees and slippage</b>, priced in before deciding to execute.</span></li>
+        <li><span><b>Short-lived opportunities</b> that are too fast to catch by hand.</span></li>
+      </ul>
+      <a class="btn btn-primary" href="signup.html">Get started <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+    <div class="reveal">
+      <div class="tscroll hud">
+        <div class="tbar"><b>Spread monitor</b><span class="sim-badge" style="margin:0">Illustration</span></div>
+        <table class="stable" id="stable">
+          <thead><tr><th>Pair</th><th class="r">DEX</th><th class="r">CEX</th><th class="r">Spread</th><th class="r">Action</th></tr></thead>
+          <tbody>
+            <tr class="go" data-pair="TON / USDT" data-dex="3.412" data-dec="3"><td>TON / USDT</td><td class="r">3.412</td><td class="r">3.598</td><td class="r sp-up">+5.40%</td><td class="r"><span class="tag go">Trade</span></td></tr>
+            <tr class="go" data-pair="XLM / USDT" data-dex="0.1180" data-dec="4"><td>XLM / USDT</td><td class="r">0.1180</td><td class="r">0.1201</td><td class="r sp-up">+1.80%</td><td class="r"><span class="tag go">Trade</span></td></tr>
+            <tr data-pair="BTC / USDT" data-dex="67410" data-dec="0"><td>BTC / USDT</td><td class="r">67,410</td><td class="r">67,452</td><td class="r sp-up">+0.06%</td><td class="r"><span class="tag">Skip</span></td></tr>
+            <tr data-pair="ETH / USDT" data-dex="3242" data-dec="0"><td>ETH / USDT</td><td class="r">3,242</td><td class="r">3,239</td><td class="r sp-dn">−0.09%</td><td class="r"><span class="tag">Skip</span></td></tr>
+          </tbody>
+        </table>
+        <p class="tfoot">Only spreads that stay positive after fees are traded.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 WHY -->
+<section class="section" id="why" data-nav>
+  <div class="container">
+    <header class="sec-head">
+      <span class="sec-tag chamfer"><span>Why ArbiEx</span><b>04</b></span>
+      <h2 data-split>Built to trade smarter <span class="muted">than a human can.</span></h2>
+    </header>
+    <div class="cells">
+      <div class="cel reveal"><span class="nbox"><svg><use href="#i-node"/></svg></span><h3>AI-driven</h3><p>Models learn market patterns to find short-lived price gaps across venues.</p></div>
+      <div class="cel reveal"><span class="nbox"><svg><use href="#i-clock"/></svg></span><h3>Runs 24/7</h3><p>Crypto never sleeps and neither does ArbiEx. No manual trading needed.</p></div>
+      <div class="cel reveal"><span class="nbox"><svg><use href="#i-shield"/></svg></span><h3>Net-profit focus</h3><p>Fees and slippage are factored in before any trade is placed.</p></div>
+      <div class="cel reveal"><span class="nbox"><svg><use href="#i-pulse"/></svg></span><h3>Transparent results</h3><p>Every executed trade and its profit appears in your dashboard.</p></div>
+      <div class="cel reveal"><span class="nbox"><svg><use href="#i-stake"/></svg></span><h3>Staking-based</h3><p>Your stake powers the bot, so you earn from trading without placing orders yourself.</p></div>
+      <div class="cel reveal"><span class="nbox"><svg><use href="#i-arb"/></svg></span><h3>DEX + CEX</h3><p>Connects decentralized pools and tier-1 exchanges, where the gaps appear.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" data-nav>
+  <div class="container faq-wrap">
+    <div>
+      <span class="sec-tag chamfer"><span>FAQ</span><b>05</b></span>
+      <h2 data-split>ArbiEx questions.</h2>
+      <a class="btn btn-line" href="https://t.me/add_toncoin" target="_blank" rel="noopener">Ask on Telegram ↗</a>
+    </div>
+    <div>
+      <div class="faq">
+        <details class="reveal"><summary><span class="qn">01</span>What is arbitrage trading?<i></i></summary><p>Buying a coin where it is cheaper and selling it where it is more expensive at the same time, keeping the difference as profit.</p></details>
+        <details class="reveal"><summary><span class="qn">02</span>How does ArbiEx earn?<i></i></summary><p>Your stake funds the bot. ArbiEx's AI finds price gaps between DEX liquidity pools and tier-1 exchanges, executes the trades and credits the net profit to your balance.</p></details>
+        <details class="reveal"><summary><span class="qn">03</span>What profit can I expect?<i></i></summary><p>ArbiEx has averaged around +5% profit. Results depend on market conditions and are not guaranteed.</p></details>
+        <details class="reveal"><summary><span class="qn">04</span>Do I need trading experience?<i></i></summary><p>No. ArbiEx runs automatically; you simply stake and track results in your dashboard.</p></details>
+        <details class="reveal"><summary><span class="qn">05</span>How do I start?<i></i></summary><p>Register with a Sponsor ID, log in, and activate ArbiEx from your dashboard.</p></details>
+      </div>
+      <p class="note"><span><b>Trading involves risk.</b> Past results, including the +5% average, do not guarantee future returns. Only stake what you can afford to hold through market changes.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="container">
+    <div class="cta hud reveal">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <p class="label"><span data-scramble>ArbiEx</span></p>
+      <h2><span class="tframe"><span class="tline">Let AI find</span></span><br><span class="tframe"><span class="tline">the gaps for you.</span></span></h2>
+      <p class="lead">Create your account with a Sponsor ID and activate ArbiEx from your dashboard.</p>
+      <div class="hero-ctas center">
+        <a class="btn btn-primary magnetic" href="signup.html">Create account <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-line" href="staking.html">See staking</a>
+      </div>
+    </div>
+  </div>
+</section>
