@@ -1,0 +1,37 @@
+# AddTON DAO
+
+> AddTON is one account for crypto staking, AI arbitrage trading, payments and tokenized real-world assets across Stellar (XLM), TON, Gram Chain and more. Registration requires a Sponsor ID from an existing member.
+
+Key facts:
+- Staking: XLM (featured), TON, Rental Wallet Coin and 45+ coins across 6+ blockchains. Advertised XLM vault APY up to 250%+; rates vary, can change and are not guaranteed.
+- ArbiEx: an AI staking bot that trades price gaps between DEX liquidity pools and tier-1 exchanges 24/7, only when the spread beats fees and slippage. Historical average around +5%; not guaranteed.
+- Gram Chain: AddTON's Layer 1 blockchain, Proof of Authority consensus, a new block about every 0.8 seconds. GCC is the native coin (33.8B total supply); wGCC is wrapped GCC on BNB Smart Chain. GCC exchange listing is coming soon; dates are announced only on official Telegram and X.
+- GramPe: a crypto wallet app to send, receive and swap TON, XLM, GCC, USDT and more, with a RuPay debit card. App store links are coming soon.
+- Earn: Helping (help-to-earn), the AddTON Airdrop (social tasks, YouTube videos, articles) and Play to Earn (coming soon).
+- Safety: AddTON never asks for passwords, private keys or seed phrases by message or email.
+
+## Products
+- [Products](https://www.addton.io/products.html): Explore AddTON: XLM and multi-coin staking, the ArbiEx AI arbitrage bot, the Gram Chain Layer 1 with its GCC coin, and the GramPe crypto wallet app.
+- [Staking](https://www.addton.io/staking.html): Stake Stellar XLM, Rental Wallet Coin, TON and 45+ coins in transparent vaults. Earn up to 250%+ APY on XLM with compounding rewards.
+- [ArbiEx](https://www.addton.io/arbiex.html): ArbiEx is an AI staking bot that trades price gaps between DEX pools and tier-1 exchanges 24/7, averaging +5% profit. Stake once and let AI trade.
+- [Gram Chain & GCC](https://www.addton.io/gram-chain.html): Gram Chain is a Layer 1 blockchain with Proof of Authority and 0.8s blocks. GCC is its native coin, with exchange listing soon and wGCC on BNB Smart Chain.
+- [GramPe](https://www.addton.io/grampe.html): GramPe is a crypto wallet app to send, receive and swap XLM, TON, GCC, USDT and more, with a RuPay debit card for everyday spending.
+
+## Earn
+- [Opportunities](https://www.addton.io/opportunities.html): More ways to earn with AddTON: Helping, our help-to-earn concept, the AddTON airdrop and Play to Earn crypto games, coming soon.
+- [Helping](https://www.addton.io/helping.html): Helping is AddTON's help-to-earn concept: support members of the community and build passive earnings, all tracked in your dashboard.
+- [Airdrop](https://www.addton.io/airdrop.html): Join the AddTON airdrop: follow, like and comment on X, Telegram, Medium and Facebook, make YouTube videos or write articles, and earn rewards.
+- [Play to Earn](https://www.addton.io/play-to-earn.html): Play games and earn crypto. AddTON Play to Earn is coming in a future update, with rewards sent straight to your AddTON wallet.
+
+## Account
+- [Create account](https://www.addton.io/signup.html): Join AddTON DAO with your Sponsor ID to stake XLM, use the ArbiEx AI bot, join the airdrop and start earning on one platform.
+- [Log in](https://www.addton.io/login.html): Sign in to the AddTON dashboard.
+
+## Official channels
+- [Telegram](https://t.me/add_toncoin)
+- [X (Twitter)](https://x.com/addtoncoin)
+- [Medium](https://medium.com/@addtondao)
+
+## Optional
+- [Home](https://www.addton.io/): Overview of every AddTON product.
+- Risk notice: crypto assets are volatile. APY, ArbiEx profit and other figures are advertised or past rates and are not guaranteed.

@@ -5,6 +5,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PAGES } from './seo.mjs';
+import { seoHead, sitemap, robots, llms, manifest } from './seo-head.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
@@ -28,18 +30,12 @@ const mega = (list, page) => list.map(([id, ic, name, sub]) =>
 const mob = (list, page, n0) => list.map(([id, , name], i) =>
   `<a href="${id}.html"${cur(page, id)}><span>${String(n0 + i).padStart(2, '0')}</span>${name}</a>`).join('\n      ');
 
-const head = (m) => `<!doctype html>
+const head = (m, body) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${m.title}</title>
-<meta name="description" content="${m.desc}">
-<meta property="og:title" content="${m.title}">
-<meta property="og:description" content="${m.desc}">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#08080D">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+${seoHead(m.page, body)}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -193,9 +189,24 @@ for (const file of fs.readdirSync(dir).filter(f => f.endsWith('.html'))) {
   meta.page = file.replace(/\.html$/, '');
   const body = src.slice(m[0].length).trim();
   const html = meta.auth
-    ? head(meta) + authNav(meta) + `\n<main id="main">\n${body}\n</main>\n` + authFooter + scripts
-    : head(meta) + sidenav(meta.sections) + announce + nav(meta) + `\n<main id="main">\n${body}\n</main>\n` + footer + scripts;
+    ? head(meta, body) + authNav(meta) + `\n<main id="main">\n${body}\n</main>\n` + authFooter + scripts
+    : head(meta, body) + sidenav(meta.sections) + announce + nav(meta) + `\n<main id="main">\n${body}\n</main>\n` + footer + scripts;
   fs.writeFileSync(path.join(root, meta.page + '.html'), html);
   n++;
 }
-console.log(`built ${n} pages`);
+// home page: refresh its SEO block in place
+const SEO_A = '<!-- seo:start -->', SEO_B = '<!-- seo:end -->';
+const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const i = home.indexOf(SEO_A), j = home.indexOf(SEO_B);
+if (i < 0 || j < 0) throw new Error('index.html is missing the seo:start / seo:end markers');
+fs.writeFileSync(path.join(root, 'index.html'), home.slice(0, i + SEO_A.length) + '\n' + seoHead('index', home) + '\n' + home.slice(j));
+
+// site-level SEO + AI visibility files
+const today = new Date().toISOString().slice(0, 10);
+fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemap(today));
+fs.writeFileSync(path.join(root, 'robots.txt'), robots());
+fs.writeFileSync(path.join(root, 'llms.txt'), llms());
+fs.writeFileSync(path.join(root, 'site.webmanifest'), manifest());
+const missing = Object.keys(PAGES).filter(p => p !== 'index' && !fs.existsSync(path.join(dir, p + '.html')));
+if (missing.length) throw new Error('SEO entries without a page: ' + missing.join(', '));
+console.log(`built ${n} pages + index SEO, sitemap.xml, robots.txt, llms.txt, site.webmanifest`);

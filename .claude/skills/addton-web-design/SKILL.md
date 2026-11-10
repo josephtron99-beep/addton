@@ -92,5 +92,13 @@ Only facts from addton.io. No invented partners, users, audits or testimonials. 
 - Never put a padding shorthand on an element that also has `.container`: it wipes the side gutter. Use padding-top / padding-bottom.
 - Forms (login, sign-up, forgot password, airdrop submit) are front-end only: client validation, show/hide password, strength meter, 3-step sign-up. A valid submit sends nothing and shows a `.form-msg` linking to the current page on addton.io, until the backend (session, anti-forgery token, captcha) is wired in.
 
+## SEO, social and AI visibility
+- All titles, descriptions, keywords, breadcrumbs, sitemap priority and share-image text live in `tools/seo.mjs` (`SITE` = production domain). `node tools/build.mjs` writes the head block for every page (the home page between `<!-- seo:start -->` / `<!-- seo:end -->`), plus `sitemap.xml`, `robots.txt`, `llms.txt` and `site.webmanifest`.
+- Head: title ≤60 chars, description 120–160, canonical, hreflang, robots (login, forgot-password and 404 are `noindex`), Open Graph + X large card with a 1200×630 image, icons, manifest.
+- JSON-LD @graph per page: Organization (sameAs X/Telegram/Medium), WebSite, WebPage/CollectionPage, BreadcrumbList, FAQPage built from the page's visible `<details>` FAQ, plus Service (staking, ArbiEx), SoftwareApplication (GramPe), Thing (GCC). Never add ratings, prices or claims that are not on the page.
+- Share images: `node tools/og.mjs` renders `assets/img/og/<page>.png` and the app icons with headless Chrome from the `og` entries in seo.mjs. Re-run it after changing a page's hero wording.
+- AI visibility: robots.txt explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended and others; `llms.txt` is a plain-language fact sheet with links. Keep it factual and keep the risk notice.
+- New page: add it to `tools/pages/` and to `PAGES` in seo.mjs (the build fails if a SEO entry has no page).
+
 ## QA before showing the user
 360/390/768/1024/1280/1440 widths: no horizontal scroll, no overlaps (watch the sidenav against right rails), tap targets at least 44px, zero console errors, visible focus, reduced-motion pass. Files: index.html, assets/css/styles.css, assets/js/main.js, assets/img/. These deploy unchanged to Vercel.
